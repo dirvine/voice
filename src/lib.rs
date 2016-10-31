@@ -52,6 +52,9 @@ extern crate time;
 
 /// Speech output
 pub mod voice;
+/// BronKerbosch clique count
+pub mod bronkerbosch;
+
 
 use voice::speak;
 
