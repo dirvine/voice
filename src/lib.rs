@@ -15,6 +15,7 @@
 // Please review the Licences for the specific language governing permissions and limitations
 // relating to use of the SAFE Network Software.
 
+#![recursion_limit = "1024"]
 //! Voice
 //!
 
@@ -26,14 +27,14 @@
 // For explanation of lint checks, run `rustc -W help` or see
 // https://github.com/maidsafe/QA/blob/master/Documentation/Rust%20Lint%20Checks.md
 #![forbid(bad_style, exceeding_bitshifts, mutable_transmutes, no_mangle_const_items,
-          unknown_crate_types, warnings)]
-#![deny(deprecated, improper_ctypes, missing_docs,
+          unknown_crate_types)]
+#![deny(deprecated, improper_ctypes,
         non_shorthand_field_patterns, overflowing_literals, plugin_as_library,
         private_no_mangle_fns, private_no_mangle_statics, stable_features, unconditional_recursion,
         unknown_lints, unsafe_code, unused, unused_allocation, unused_attributes,
         unused_comparisons, unused_features, unused_parens, while_true)]
 #![warn(trivial_casts, trivial_numeric_casts, unused_extern_crates, unused_import_braces,
-        unused_qualifications, unused_results)]
+        unused_qualifications, unused_results, missing_docs)]
 #![allow(box_pointers, fat_ptr_transmutes, missing_copy_implementations,
          missing_debug_implementations, variant_size_differences)]
 
@@ -45,16 +46,23 @@
 
 #[cfg_attr(feature="clippy", allow(useless_attribute))]
 #[allow(unused_extern_crates)]
+/// required by error_chain
 #[cfg(test)]
 extern crate time;
-// extern crate rustc_serialize;
-// extern crate toml;
+extern crate petgraph;
+extern crate rustc_serialize;
+extern crate toml;
+#[macro_use]
+extern crate error_chain;
 
+/// configuration
+pub mod config;
 /// Speech output
 pub mod voice;
 /// BronKerbosch clique count
 pub mod bronkerbosch;
-
+/// Errors
+pub mod error;
 
 use voice::speak;
 
@@ -66,17 +74,10 @@ pub fn start() {
 #[cfg(test)]
 mod tests {
     use voice::{speak, speak_async};
-    use time;
 
     #[test]
     fn speak1() {
         speak("Basic test passes");
-        speak_async("ah");
-    }
-    #[test]
-    fn time() {
-        let t = time::now().to_local();
-
-        speak(&format!("time is now {}", t.asctime()));
+        speak_async("ah hope you could hear me Ok ");
     }
 }
