@@ -52,6 +52,7 @@ extern crate time;
 extern crate petgraph;
 extern crate rustc_serialize;
 extern crate toml;
+// extern crate pocketsphinx;
 #[macro_use]
 extern crate error_chain;
 
@@ -77,6 +78,7 @@ mod tests {
 
     #[test]
     fn speak1() {
+        speak("Hello my name is Fine-man, what's you're name?");
         speak("Basic test passes");
         speak_async("ah hope you could hear me Ok ");
     }
