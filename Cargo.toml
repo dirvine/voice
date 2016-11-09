@@ -3,7 +3,7 @@ authors = ["David Irvine <david.irvine@maidsafe.net>"]
 name = "voice"
 description = "Attempting to use tts and stt in rust, exploration only. no code yet"
 license = "GPL-3.0"
-version = "0.1.4"
+version = "0.1.5-pre"
 
 [dependencies]
 clap = "2.16.4"
