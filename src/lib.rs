@@ -65,7 +65,9 @@ pub mod bronkerbosch;
 /// Errors
 pub mod error;
 
-use voice::speak;
+
+
+pub use voice::speak;
 
 /// Open lib
 pub fn start() {
